@@ -5,10 +5,19 @@ const prevAndNextContainer = document.querySelector('#prev-and-next-container');
 
 const apiURL = `https://api.lyrics.ovh`;
 
+const fetchSongs = term => {
+    
+};
+
 form.addEventListener('submit', event => {
     event.preventDefault();
 
-    const searchTerm = searchInput.value;
+    const searchTerm = searchInput.value.trim();
 
-    console.log(searchTerm);
+    if (!searchTerm) {
+        songsContainer.innerHTML = `<li class="warning-message">Por favor, digite um termo válido</li>`
+        return;
+    }
+
+    fetchSongs(searchTerm);
 });
