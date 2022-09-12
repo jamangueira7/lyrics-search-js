@@ -5,8 +5,10 @@ const prevAndNextContainer = document.querySelector('#prev-and-next-container');
 
 const apiURL = `https://api.lyrics.ovh`;
 
-const fetchSongs = term => {
-    
+const fetchSongs = async term => {
+    const response = await fetch(`${apiURL}/suggest/${term}`);
+    const data = await response.json();
+
 };
 
 form.addEventListener('submit', event => {
@@ -15,7 +17,7 @@ form.addEventListener('submit', event => {
     const searchTerm = searchInput.value.trim();
 
     if (!searchTerm) {
-        songsContainer.innerHTML = `<li class="warning-message">Por favor, digite um termo válido</li>`
+        songsContainer.innerHTML = `<li class="warning-message">Por favor, digite um termo válido</li>`;
         return;
     }
 
