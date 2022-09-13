@@ -13,16 +13,14 @@ const getMoreSongs = async url => {
 }
 
 const insertSongsIntoPage = async songsInfo => {
-
-
     songsContainer.innerHTML = songsInfo.data
         .map(song => `
           <li class="song">
-        <span class="song-artist"><strong>${song.artist.name}</strong> - ${song.title}</span>
-        <button class="btn" data-artist="${song.artist.name}" data-song-title="${song.title}">Ver letra</button>
-        </li>
+            <span class="song-artist"><strong>${song.artist.name}</strong> - ${song.title}</span>
+            <button class="btn" data-artist="${song.artist.name}" data-song-title="${song.title}">Ver letra</button>
+          </li>
         `).join('');
-    
+
     if (songsInfo.prev || songsInfo.next) {
         prevAndNextContainer.innerHTML = `
             ${ songsInfo.prev ? `<button class="btn" onClick="getMoreSongs('${songsInfo.prev}')">Anteriores</button>` : '' }
@@ -55,3 +53,31 @@ form.addEventListener('submit', event => {
 
     fetchSongs(searchTerm);
 });
+
+const fetchLyrics = async (artist, songTitle) => {
+    const response = await fetch(`${apiURL}/v1/${artist}/${songTitle}`);
+    const data = await response.json();
+
+    const lycrics = data.lyrics.replace(/(\r\n|\r|\n)/g, '<br>');
+
+    songsContainer.innerHTML = `
+    <li class="lyrics-container">
+        <h2><strong>${songTitle}</strong> - ${artist}</h2>
+        <p class="lyrics">${lycrics}</p>
+    </li>
+    `;
+};
+
+songsContainer.addEventListener('click', event => {
+    const clickedElement = event.target;
+
+    if (clickedElement.tagName === 'BUTTON') {
+        const artist = clickedElement.getAttribute('data-artist');
+        const songTitle = clickedElement.getAttribute('data-song-title');
+
+
+        prevAndNextContainer.innerHTML = '';
+
+        fetchLyrics(artist, songTitle);
+    }
+})
