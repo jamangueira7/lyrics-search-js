@@ -5,7 +5,7 @@
  </p>
 <br>
 
-# Contagem para o ano novo JS
+# Buscador de letra de musica JS
 
 ## 🚀 Tecnologias
 
@@ -17,9 +17,9 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 💻 Projeto
 
-Projeto faz a contagem do ano corrente ate o proximo ano novo.
+Projeto faz a busca das letras das musicas pelo nome do artista.
 
-Video aula do canal [Roger Melo](https://www.youtube.com/watch?v=ms0mXabu5RY).
+Video aula do canal [Roger Melo](https://www.youtube.com/watch?v=sgiTuXGin2I).
 
 <p align="center">
   <img alt="animation" src=".github/imagem1.PNG" width="100%">
